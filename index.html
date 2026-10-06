@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusFlow - Student Productivity & Focus Assistant</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🎯</div>
+        <div><h1>FocusFlow</h1><p>Study smarter</p></div>
+      </div>
+      <nav>
+        <button class="nav-btn active" data-section="dashboard">🏠 <span>Dashboard</span></button>
+        <button class="nav-btn" data-section="tasks">📝 <span>Tasks</span></button>
+        <button class="nav-btn" data-section="goals">🎯 <span>Goals</span></button>
+        <button class="nav-btn" data-section="timer">⏱️ <span>Focus Timer</span></button>
+        <button class="nav-btn" data-section="schedule">📅 <span>Schedule</span></button>
+        <button class="nav-btn" data-section="progress">📊 <span>Progress</span></button>
+        <button class="nav-btn" data-section="achievements">🏆 <span>Achievements</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button id="themeBtn" class="secondary-btn">🌙 Dark Mode</button>
+        <button id="clearBtn" class="danger-btn">Reset Demo Data</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">STUDENT PRODUCTIVITY ASSISTANT</p>
+          <h2 id="pageTitle">Good day! 👋</h2>
+          <p class="muted">Plan your work. Protect your focus. Track your progress.</p>
+        </div>
+        <div class="profile">👩‍🎓 <span>Student</span></div>
+      </header>
+
+      <section id="dashboard" class="section active">
+        <div class="hero">
+          <div>
+            <span class="pill">✨ Today's focus</span>
+            <h3>Make progress, one focused session at a time.</h3>
+            <p>Use FocusFlow to organize tasks, goals and study sessions in one place.</p>
+            <button class="primary-btn" data-go="timer">Start Focus Session →</button>
+          </div>
+          <div class="hero-ring"><span id="heroPercent">0%</span><small>focus score</small></div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card"><span>📝</span><strong id="totalTasks">0</strong><p>Total Tasks</p></div>
+          <div class="stat-card"><span>✅</span><strong id="completedTasks">0</strong><p>Completed</p></div>
+          <div class="stat-card"><span>⏳</span><strong id="pendingTasks">0</strong><p>Pending</p></div>
+          <div class="stat-card"><span>🔥</span><strong id="streak">0</strong><p>Day Streak</p></div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head"><h3>Today's Tasks</h3><button class="text-btn" data-go="tasks">View all</button></div>
+            <div id="todayTasks" class="task-list"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Daily Goal</h3><span id="goalPercent">0%</span></div>
+            <div class="progress-bar"><div id="goalBar" class="progress-fill"></div></div>
+            <p class="muted">Complete your tasks to improve today's productivity score.</p>
+            <div class="mini-metrics"><span>Completed <b id="goalDone">0</b></span><span>Total <b id="goalTotal">0</b></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tasks" class="section">
+        <div class="section-head"><div><h3>📝 My Tasks</h3><p class="muted">Manage your study and personal tasks.</p></div><button id="addTaskBtn" class="primary-btn">+ Add Task</button></div>
+        <div class="toolbar">
+          <input id="searchInput" type="search" placeholder="🔎 Search tasks...">
+          <select id="filterSelect"><option value="all">All tasks</option><option value="pending">Pending</option><option value="completed">Completed</option><option value="high">High priority</option></select>
+        </div>
+        <div id="allTasks" class="task-grid"></div>
+      </section>
+
+      <section id="goals" class="section">
+        <div class="section-head"><div><h3>🎯 Goals</h3><p class="muted">Turn big plans into achievable targets.</p></div><button id="addGoalBtn" class="primary-btn">+ Add Goal</button></div>
+        <div id="goalsList" class="goal-grid"></div>
+      </section>
+
+      <section id="timer" class="section">
+        <div class="timer-card">
+          <span class="pill">⏱️ Focus session</span>
+          <h3>Pomodoro Timer</h3>
+          <p class="muted">25 minutes of focused work, then take a short break.</p>
+          <div id="timerDisplay" class="timer-display">25:00</div>
+          <div class="timer-actions">
+            <button id="startTimer" class="primary-btn">▶ Start</button>
+            <button id="pauseTimer" class="secondary-btn">⏸ Pause</button>
+            <button id="resetTimer" class="secondary-btn">↻ Reset</button>
+          </div>
+          <p id="timerStatus" class="timer-status">Ready when you are.</p>
+          <div class="session-count">Completed focus sessions: <b id="sessionCount">0</b></div>
+        </div>
+      </section>
+
+      <section id="schedule" class="section">
+        <div class="section-head"><div><h3>📅 Today's Schedule</h3><p class="muted">Keep your day organized.</p></div></div>
+        <div id="scheduleList" class="schedule-list"></div>
+      </section>
+
+      <section id="progress" class="section">
+        <div class="section-head"><div><h3>📊 Progress</h3><p class="muted">See how consistently you are completing your work.</p></div></div>
+        <div class="progress-dashboard">
+          <div class="big-score"><span id="bigProgress">0%</span><small>task completion</small></div>
+          <div class="card">
+            <h3>Productivity Summary</h3>
+            <div class="metric-row"><span>Tasks completed</span><b id="progressCompleted">0</b></div>
+            <div class="metric-row"><span>Tasks remaining</span><b id="progressPending">0</b></div>
+            <div class="metric-row"><span>Focus sessions</span><b id="progressSessions">0</b></div>
+            <div class="metric-row"><span>Goals completed</span><b id="progressGoals">0</b></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="achievements" class="section">
+        <div class="section-head"><div><h3>🏆 Achievements</h3><p class="muted">Small wins build strong habits.</p></div></div>
+        <div id="achievementGrid" class="achievement-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="taskDialog">
+    <form method="dialog" id="taskForm" class="dialog-form">
+      <button type="button" class="close-btn" data-close="taskDialog">×</button>
+      <h3>Add New Task</h3>
+      <label>Task name<input id="taskName" required maxlength="80" placeholder="e.g. Complete DBMS Unit 2"></label>
+      <label>Category<input id="taskCategory" maxlength="40" placeholder="e.g. Study"></label>
+      <label>Priority<select id="taskPriority"><option>High</option><option selected>Medium</option><option>Low</option></select></label>
+      <label>Date<input id="taskDate" type="date"></label>
+      <button class="primary-btn" type="submit">Add Task</button>
+    </form>
+  </dialog>
+
+  <dialog id="goalDialog">
+    <form method="dialog" id="goalForm" class="dialog-form">
+      <button type="button" class="close-btn" data-close="goalDialog">×</button>
+      <h3>Add New Goal</h3>
+      <label>Goal name<input id="goalName" required maxlength="60" placeholder="e.g. Study 3 hours"></label>
+      <label>Target<input id="goalTarget" type="number" min="1" max="100" value="100"></label>
+      <button class="primary-btn" type="submit">Add Goal</button>
+    </form>
+  </dialog>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
